@@ -35,7 +35,24 @@ header('Cache-Control: max-age=0');
 //write the result to a file
 $file = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
 
+//$file->save('test.xlsx'); after loading the page file will download
+
 //output to php output instead of file name
 $file->save('php://output');
+
+
+/*..................IF u have a bacword version of xl 2003........
+
+......................For MsOffice xls format..change.....
+
+header('Content-Type: application/vnd.vnd.ms-excel');
+header('Content-Disposition: attachment; filename="testy.xls"');
+
+//write the result to a file
+$file = PHPExcel_IOFactory::createWriter($excel, 'Excel5);
+
+*/
+
+
 
 ?>
