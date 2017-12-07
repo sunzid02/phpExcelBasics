@@ -20,8 +20,22 @@ $excel->setActiveSheetIndex(0)
 ->setCellValue('A1','hello')
 ->setCellValue('B1','world');
 
+// redirect to browser (download) instead of saving the result as a get_included_file
+/*
+  First we need to setup the http header
+  to tell the browser that this is an excel
+  speradsheet file, not a regular html file
+*/
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment; filename="testy.xlsx"');
+
+//Every time loads a new file
+header('Cache-Control: max-age=0');
+
 //write the result to a file
 $file = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-$file->save('test.xlsx');
+
+//output to php output instead of file name
+$file->save('php://output');
 
 ?>
